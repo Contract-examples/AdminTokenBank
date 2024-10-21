@@ -22,7 +22,7 @@ contract AdminTokenBank is Ownable {
     error InsufficientBalance();
     error TransferFailedForDeposit();
     error TransferFailedForWithdraw();
-    error OnlyAdminOrOwnerCanWithdraw();
+    error OnlyOwnerCanWithdraw();
     error WithdrawOnlyToAdminOrOwner();
     error InvalidAdminAddress();
 
@@ -53,9 +53,9 @@ contract AdminTokenBank is Ownable {
     }
 
     function withdrawTo(uint256 amount, address to) external {
-        // if msg.sender is not admin or owner, revert
-        if (_msgSender() != admin && _msgSender() != owner()) {
-            revert OnlyAdminOrOwnerCanWithdraw();
+        // if msg.sender is not owner, revert
+        if (_msgSender() != owner()) {
+            revert OnlyOwnerCanWithdraw();
         }
 
         // if to is not admin or owner, revert

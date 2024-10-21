@@ -33,10 +33,25 @@ contract AdminTokenBankTest is Test {
 
         assertEq(bank.balances(), 500 * 10 ** 18);
 
+        // withdraw by user
         vm.startPrank(user);
         // set expect revert
-        vm.expectRevert(AdminTokenBank.OnlyAdminOrOwnerCanWithdraw.selector);
+        vm.expectRevert(AdminTokenBank.OnlyOwnerCanWithdraw.selector);
         bank.withdrawTo(500 * 10 ** 18, user);
         vm.stopPrank();
+
+        // withdraw by admin to admin
+        vm.startPrank(admin);
+        // set expect revert
+        vm.expectRevert(AdminTokenBank.OnlyOwnerCanWithdraw.selector);
+        bank.withdrawTo(500 * 10 ** 18, admin);
+        vm.stopPrank();
+
+        // withdraw by owner to admin
+        vm.startPrank(owner);
+        bank.withdrawTo(500 * 10 ** 18, admin);
+        vm.stopPrank();
+
+        assertEq(bank.balances(), 0);
     }
 }
