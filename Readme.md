@@ -1,5 +1,5 @@
 # Foundry Template
-Foundry Template for arbitrum testnet
+Token BigBank
 
 ## Usage
 
