@@ -4,7 +4,7 @@ pragma solidity ^0.8.28;
 import "forge-std/Script.sol";
 import "../src/AdminTokenBank.sol";
 
-contract DeployAdminTokenBank is Script {
+contract DeployAdminTokenBankScript is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("SEPOLIA_WALLET_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
