@@ -16,7 +16,7 @@ contract AdminTokenBankTest is Test {
     function setUp() public {
         token = new MyERC20Token("MyNFTToken", "MTK");
         owner = address(this);
-        admin = address(0x260ef6029160BB9E89A50e0ead94DBf3F4725106);
+        admin = address(0x3389);
         user = address(0x1);
         bank = new AdminTokenBank(admin, address(token));
 
