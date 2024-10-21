@@ -1,6 +1,4 @@
-# Foundry Template
-Admin token bank
-
+# Admin token bank
 
 ## Deploy
 ```
