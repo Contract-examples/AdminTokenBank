@@ -2,9 +2,9 @@
 pragma solidity ^0.8.28;
 
 import "forge-std/Test.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../src/AdminTokenBank.sol";
 import "../src/MyERC20Token.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract AdminTokenBankTest is Test {
     AdminTokenBank public bank;
