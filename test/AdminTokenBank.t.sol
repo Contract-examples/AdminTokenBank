@@ -21,10 +21,10 @@ contract AdminTokenBankTest is Test {
         bank = new AdminTokenBank(admin, address(token));
 
         // give user 1000 tokens
-        token.mint(user, 1000 * 10 ** 18);
+        token.mint(user, 10_000 * 10 ** 18);
     }
 
-    function testDepositAndWithdraw() public {
+    function testDepositAndWithdrawAndTransferAdmin() public {
         // deposit by user
         vm.startPrank(user);
         token.approve(address(bank), 500 * 10 ** 18);
@@ -50,6 +50,24 @@ contract AdminTokenBankTest is Test {
         // withdraw by owner to admin
         vm.startPrank(owner);
         bank.withdrawTo(500 * 10 ** 18, admin);
+        vm.stopPrank();
+
+        assertEq(bank.balances(), 0);
+
+        // deposit by user
+        vm.startPrank(user);
+        token.approve(address(bank), 500 * 10 ** 18);
+        bank.deposit(500 * 10 ** 18);
+        vm.stopPrank();
+
+        // transfer admin to user
+        vm.startPrank(owner);
+        bank.transferAdmin(user);
+        vm.stopPrank();
+
+        // withdraw by owner to user
+        vm.startPrank(owner);
+        bank.withdrawTo(500 * 10 ** 18, user);
         vm.stopPrank();
 
         assertEq(bank.balances(), 0);
